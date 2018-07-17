@@ -38,7 +38,7 @@ $(document).ready(function(){
        return questionHTML;
     }
 
-    var questionsArray = ['question1', 'question2', 'question3'];
+    var questionsArray = ['I am a worrier', 'I make friends easily', 'I have a vivid imagination', 'I trust others', 'I complete tasks successfully', 'I get angry easily', 'I really enjoy large parties and gatherings', 'I think art is important', 'I like things to be neat', 'I love to help others'];
     var choiceArray = [1,2,3,4,5];
 
     showQuestions()
