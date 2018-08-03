@@ -2,38 +2,48 @@
 var friendData = require("../data/friends");
 
 // ROUTING
-module.exports = function(app) {
+module.exports = function (app) {
   // API GET Requests
-  app.get("/api/friends", function(req, res) {
+  app.get("/api/friends", function (req, res) {
     res.json(friendData);
   });
 
   // API POST Requests
-  app.post("/api/friends", function(req, res) {
+  app.post("/api/friends", function (req, res) {
 
     //collect input data
-    var inputResponse = req.body;
-    console.log(JSON.stringify(req.body));
+    var choiceResponse = req.body;
     //collect survey data
-    var surveyResponse = 
+    for (var i = 0; i < choiceResponse.scores.length; i++) {
+      choiceResponse.scores[i] = parseInt(choiceResponse.scores[i]);
+    }
+    //Determine the user's most compatible friend 
+    var firstMatch = 0;
+    var minDiff = 50;
 
-//     Determine the user's most compatible friend using the following as a guide:
+    //Compare the difference between current user's scores against those from other users.
+    //Add up the differences to calculate the `totalDifference`.
+    for(var i = 0; i < friendScores.length; i++) {
+      var totalDifference = 0;
+      for(var j = 0; j < friendScores[i].scores.length; j++) {
+        var difference = Math.abs(choiceResponse.scores[j] - friendScores[i].scores[j]);
+        totalDifference += difference;
+      }
+    //    * The closest match will be the user with the least amount of difference.
+    if(totalDifference < minimumDifference) {
+      bestFriendIndex = i;
+      minimumDifference = totalDifference;
+    }
+  }
 
-//    * Convert each user's results into a simple array of numbers (ex: `[5, 1, 4, 4, 5, 1, 2, 5, 4, 1]`).
-//    * With that done, compare the difference between current user's scores against those from other users, question by question. Add up the differences to calculate the `totalDifference`.
-//      * Example: 
-//        * User 1: `[5, 1, 4, 4, 5, 1, 2, 5, 4, 1]`
-//        * User 2: `[3, 2, 6, 4, 5, 1, 2, 5, 4, 1]`
-//        * Total Difference: **2 + 1 + 2 =** **_5_**
-//    * Remember to use the absolute value of the differences. Put another way: no negative solutions! Your app should calculate both `5-3` and `3-5` as `2`, and so on. 
-//    * The closest match will be the user with the least amount of difference.
 
-// 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
-//    * The modal should display both the name and picture of the closest match.
 
-// friendData.push(req.body); 
-      res.json(friendData);
+    // 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
+    //    * The modal should display both the name and picture of the closest match.
+
+    friendData.push(choiceResponse); 
+    res.json(friendData);
   });
 
-    console.log(friendData);
+  console.log(friendData);
 };
