@@ -11,6 +11,11 @@ module.exports = function(app) {
   // API POST Requests
   app.post("/api/friends", function(req, res) {
 
+    //collect input data
+    var inputResponse = req.body;
+    //collect survey data
+    var surveyResponse = 
+
 //     Determine the user's most compatible friend using the following as a guide:
 
 //    * Convert each user's results into a simple array of numbers (ex: `[5, 1, 4, 4, 5, 1, 2, 5, 4, 1]`).
@@ -25,7 +30,7 @@ module.exports = function(app) {
 // 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
 //    * The modal should display both the name and picture of the closest match.
 
-
+// friendData.push(req.body); 
       res.json(friendData);
   });
 
