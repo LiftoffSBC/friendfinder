@@ -23,27 +23,26 @@ module.exports = function (app) {
 
     //Compare the difference between current user's scores against those from other users.
     //Add up the differences to calculate the `totalDifference`.
-    for(var i = 0; i < friendScores.length; i++) {
+    for (var i = 0; i < friendScores.length; i++) {
       var totalDifference = 0;
-      for(var j = 0; j < friendScores[i].scores.length; j++) {
+      for (var j = 0; j < friendScores[i].scores.length; j++) {
         var difference = Math.abs(choiceResponse.scores[j] - friendScores[i].scores[j]);
         totalDifference += difference;
       }
-    //    * The closest match will be the user with the least amount of difference.
-    if(totalDifference < minimumDifference) {
-      bestFriendIndex = i;
-      minimumDifference = totalDifference;
+      //    * The closest match will be the user with the least amount of difference.
+      if (totalDifference < minimumDifference) {
+        bestFriendIndex = i;
+        minimumDifference = totalDifference;
+      }
     }
-  }
-
-
-
-    // 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
-    //    * The modal should display both the name and picture of the closest match.
-
-    friendData.push(choiceResponse); 
+    friendData.push(choiceResponse);
     res.json(friendData);
+  // 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
+  //    * The modal should display both the name and picture of the closest match.
+    $("<modal>").append(friendData);
   });
 
-  console.log(friendData);
+
+
+  // console.log(friendData);
 };
