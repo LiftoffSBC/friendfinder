@@ -13,6 +13,7 @@ module.exports = function(app) {
 
     //collect input data
     var inputResponse = req.body;
+    console.log(JSON.stringify(req.body));
     //collect survey data
     var surveyResponse = 
 
