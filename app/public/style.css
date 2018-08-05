@@ -1,15 +1,26 @@
 #questions {
     font-family: 'Courier New', Courier, monospace;
-    background-color: bisque;
-    font-size: 18px
-}
-#main {
-    background-color: bisque;
-    font-family: 'Courier New', Courier, monospace;
+    background-color: rgba(0, 0, 0, 0.288);
+    font-size: 18px;
+    color: white;
+    font-weight: bolder;
+
 
 }
+#main {
+    background-image: url(../public/images/friendfinder_BG_1250x800.jpg);
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bolder;
+    font-size: 20px;
+}
+
 #name, #photo, #surveyform, #homemain  {
     font-family: 'Courier New', Courier, monospace;
-    background-color: bisque;
-    font-size: 12px
+    background-color: rgba(0, 0, 0, 0.288);
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.h5 {
+    background-color: rgba(255, 255, 255, 0.308)
 }
