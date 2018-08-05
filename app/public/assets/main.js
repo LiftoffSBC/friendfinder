@@ -1,7 +1,24 @@
 $(document).ready(function(){
     // Your survey should have 10 questions of your choosing. Each answer should be on a scale of 1 to 5 based on how much the user agrees or disagrees with a question.
 
-    $("#surveyform").on("submit", function () {
+    $("#surveyform").on("submit", function (event) {
+        event.preventDefault();
+        var form = event.target;
+        var friend = {
+            friendName: $(form.name).val(),
+            friendPhoto: $(form.photo).val(),
+            friendScores: getScores($(form).find(".question-select"))
+        }
+
+        $.ajax({
+            dataType: "json",
+            method: "POST",
+            url: "/api/friends",
+            data: friend
+          })
+          .done(function( result ) {
+            console.log(result);
+          });
         //loop through all of selects and store the value of the selected option of each select in an array
 // this array is the scores for the users object
 // this user object will also need it's photo url and it's users name
@@ -13,19 +30,32 @@ $(document).ready(function(){
             //loop through choiceArray and use jquery to make a new option element. text & value of each option will be choiceArray[j]
             //inside this loop (but outside and after nested loop) append your select to your div element with ID of questions
 
-            var questionHTML = getQuestionHTML(questionsArray[i])
+            var questionHTML = getQuestionHTML(questionsArray[i], i+1)
+            
         
             $("#questions").append(questionHTML);
         }
     }
+    function getScores (questionElements) {
+       var scores = [];
 
-    function getQuestionHTML(question) {
+        for (let i=0; i<questionElements.length; i++) {
+            var select = questionElements[i];
+            var score = parseInt($(select).find(":selected").val());
+            scores.push(score);
+        }
+       return scores
+    }
+
+    function getQuestionHTML(question, questionNumber) {
         var questionHTML = $("<div>");
        var questionLabel = $("<p>");
         questionHTML.text(question);
         questionHTML.append(questionLabel);
 
         var questionSelect = $("<select>");
+        questionSelect.addClass("question-select");
+        // questionSelect.attr("name", "question" + questionNumber);
         for (var j=0; j<choiceArray.length; j++) {
             var choiceOption = $("<option>");
             choiceOption.text(choiceArray[j]);

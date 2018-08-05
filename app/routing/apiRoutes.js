@@ -13,36 +13,35 @@ module.exports = function (app) {
 
     //collect input data
     var choiceResponse = req.body;
+    console.log(choiceResponse);
     //collect survey data
-    for (var i = 0; i < choiceResponse.scores.length; i++) {
-      choiceResponse.scores[i] = parseInt(choiceResponse.scores[i]);
-    }
-    //Determine the user's most compatible friend 
-    var firstMatch = 0;
-    var minDiff = 50;
 
-    //Compare the difference between current user's scores against those from other users.
-    //Add up the differences to calculate the `totalDifference`.
-    for (var i = 0; i < friendScores.length; i++) {
-      var totalDifference = 0;
-      for (var j = 0; j < friendScores[i].scores.length; j++) {
-        var difference = Math.abs(choiceResponse.scores[j] - friendScores[i].scores[j]);
-        totalDifference += difference;
-      }
-      //    * The closest match will be the user with the least amount of difference.
-      if (totalDifference < minimumDifference) {
-        bestFriendIndex = i;
-        minimumDifference = totalDifference;
+    //Determine the user's most compatible friend 
+    var bestScore = 50000000000000;
+    var bestMatch = {};
+
+    for (var i = 0; i < friendData.length; i++) {
+      var friendScore = compareScores(choiceResponse.friendScores, friendData[i].friendScores);
+
+      if (friendScore < bestScore) {
+        bestScore = friendScore;
+        bestMatch = friendData[i]
       }
     }
-    friendData.push(choiceResponse);
-    res.json(friendData);
-  // 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
-  //    * The modal should display both the name and picture of the closest match.
-    $("<#themodal>").append(friendData);
+
+
+    res.json(bestMatch)
+
+
   });
 
-
+  function compareScores(userScores, friendScores) {
+    var difference = 0
+    for (var i = 0; i < userScores.length; i++) {
+      difference += Math.abs(userScores[i] - friendScores[i]);
+    }
+    return difference
+  }
 
   // console.log(friendData);
 };
