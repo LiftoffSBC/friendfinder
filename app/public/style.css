@@ -1,12 +1,11 @@
 #questions {
     font-family: 'Courier New', Courier, monospace;
-    background-color: rgba(0, 0, 0, 0.288);
+    background-color: rgba(0, 0, 0, 0.815);
     font-size: 18px;
     color: white;
     font-weight: bolder;
-
-
 }
+
 #main {
     background-image: url(../public/images/friendfinder_BG_1250x800.jpg);
     font-family: 'Courier New', Courier, monospace;
@@ -14,13 +13,16 @@
     font-size: 20px;
 }
 
-#name, #photo, #surveyform, #homemain  {
+#surveyform {
+    background-image: url(../public/images/friendfinder_BG_1250x800.jpg);
+}
+
+#name, #photo, #homemain  {
     font-family: 'Courier New', Courier, monospace;
-    background-color: rgba(0, 0, 0, 0.288);
+    /* background-color: rgba(0, 0, 0, 0.288); */
     font-size: 20px;
     font-weight: bolder;
 }
 
-.h5 {
-    background-color: rgba(255, 255, 255, 0.308)
-}
+
+
