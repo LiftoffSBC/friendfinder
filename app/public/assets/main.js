@@ -20,7 +20,7 @@ $(document).ready(function () {
                 event.preventDefault();
                 $('#theModal').modal('toggle');
                 $("#bestFriendPhoto").append(result.friendPhoto);
-                $("bestFriendPhoto").attr("src", result.friendPhoto);
+                $("#bestFriendPhoto").attr("src", result.friendPhoto);
                 $("#results").append(result.friendName);
 
                 console.log(result);
