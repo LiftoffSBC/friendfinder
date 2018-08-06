@@ -4,7 +4,7 @@
 var friendArray = [
     {
       friendName: "J.D. Martinez",
-      friendPhoto: "https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjsit7_7NDcAhWL64MKHVKrBhcQjRx6BAgBEAU&url=http%3A%2F%2Fsonsofsamhorn.com%2Fbaseball%2Fwhy-j-d-martinez-is-an-elite-hitter%2F&psig=AOvVaw3I6iu4l4WqQHG0HkkL4wVN&ust=1533384614978700",
+      friendPhoto: "https://d1tjohjvimcqgl.cloudfront.net/category/1325_n.jpg",
       friendScores: [
         5,
         1,
@@ -21,16 +21,16 @@ var friendArray = [
 
     {
       friendName: "David Ortiz",
-      friendPhoto: "https://thenypost.files.wordpress.com/2016/02/papi.jpg?quality=90&strip=all&w=1033",
+      friendPhoto: "https://cdn10.bostonmagazine.com/wp-content/uploads/sites/2/2018/03/David_Ortiz-e1461861031757.jpg",
       friendScores: [
-        5,
         2,
-        3,
-        4,
-        2,
-        5,
         1,
-        4,
+        1,
+        3,
+        1,
+        2,
+        1,
+        2,
         4,
         2
       ]

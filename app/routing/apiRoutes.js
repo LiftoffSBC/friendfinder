@@ -14,7 +14,6 @@ module.exports = function (app) {
     //collect input data
     var choiceResponse = req.body;
     console.log(choiceResponse);
-    //collect survey data
 
     //Determine the user's most compatible friend 
     var bestScore = 50000000000000;
@@ -28,11 +27,7 @@ module.exports = function (app) {
         bestMatch = friendData[i]
       }
     }
-
-
     res.json(bestMatch)
-
-
   });
 
   function compareScores(userScores, friendScores) {
@@ -43,5 +38,4 @@ module.exports = function (app) {
     return difference
   }
 
-  // console.log(friendData);
 };

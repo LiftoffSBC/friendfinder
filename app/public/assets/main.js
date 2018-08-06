@@ -1,6 +1,6 @@
-$(document).ready(function(){
-    // Your survey should have 10 questions of your choosing. Each answer should be on a scale of 1 to 5 based on how much the user agrees or disagrees with a question.
+$(document).ready(function () {
 
+    //set up on click event to compare scores and generate best friend
     $("#surveyform").on("submit", function (event) {
         event.preventDefault();
         var form = event.target;
@@ -9,54 +9,52 @@ $(document).ready(function(){
             friendPhoto: $(form.photo).val(),
             friendScores: getScores($(form).find(".question-select"))
         }
-
         $.ajax({
             dataType: "json",
             method: "POST",
             url: "/api/friends",
             data: friend
-          })
-          .done(function( result ) {
-            console.log(result);
-          });
-        //loop through all of selects and store the value of the selected option of each select in an array
-// this array is the scores for the users object
-// this user object will also need it's photo url and it's users name
+        })
+            //show modal with best friend data
+            .done(function (result) {
+                event.preventDefault();
+                $('#theModal').modal('toggle');
+                $("#bestFriendPhoto").append(result.friendPhoto);
+                $("bestFriendPhoto").attr("src", result.friendPhoto);
+                $("#results").append(result.friendName);
+
+                console.log(result);
+            });
     });
-
-    function showQuestions () {
-        for (var i=0; i<questionsArray.length; i++) {
-            //use jquery to make a select and use questionsArray[i] as it's text
-            //loop through choiceArray and use jquery to make a new option element. text & value of each option will be choiceArray[j]
-            //inside this loop (but outside and after nested loop) append your select to your div element with ID of questions
-
-            var questionHTML = getQuestionHTML(questionsArray[i], i+1)
-            
-        
+    //append questions to html
+    function showQuestions() {
+        for (var i = 0; i < questionsArray.length; i++) {
+            var questionHTML = getQuestionHTML(questionsArray[i], i + 1)
             $("#questions").append(questionHTML);
         }
     }
-    function getScores (questionElements) {
-       var scores = [];
+    // get user input
+    function getScores(questionElements) {
+        var scores = [];
 
-        for (let i=0; i<questionElements.length; i++) {
+        for (let i = 0; i < questionElements.length; i++) {
             var select = questionElements[i];
             var score = parseInt($(select).find(":selected").val());
             scores.push(score);
         }
-       return scores
+        return scores
     }
-
+    //generate question html
     function getQuestionHTML(question, questionNumber) {
         var questionHTML = $("<div>");
-       var questionLabel = $("<p>");
+        var questionLabel = $("<p>");
         questionHTML.text(question);
         questionHTML.append(questionLabel);
 
         var questionSelect = $("<select>");
         questionSelect.addClass("question-select");
-        // questionSelect.attr("name", "question" + questionNumber);
-        for (var j=0; j<choiceArray.length; j++) {
+        //generate option html
+        for (var j = 0; j < choiceArray.length; j++) {
             var choiceOption = $("<option>");
             choiceOption.text(choiceArray[j]);
             choiceOption.val(choiceArray[j]);
@@ -65,13 +63,14 @@ $(document).ready(function(){
 
         questionHTML.append(questionSelect);
 
-       return questionHTML;
+        return questionHTML;
     }
-
+    //hold questions
     var questionsArray = ['I am a worrier', 'I make friends easily', 'I have a vivid imagination', 'I trust others', 'I complete tasks successfully', 'I get angry easily', 'I really enjoy large parties and gatherings', 'I think art is important', 'I like things to be neat', 'I love to help others'];
-    var choiceArray = [1,2,3,4,5];
+    var choiceArray = [1, 2, 3, 4, 5];
 
     showQuestions()
 
-//NO CODE BELOW THIS LINE
+
+    //NO CODE BELOW THIS LINE
 });
