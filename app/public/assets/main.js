@@ -16,12 +16,15 @@ $(document).ready(function () {
             data: friend
         })
             //show modal with best friend data
+            //clear then append
             .done(function (result) {
                 event.preventDefault();
+                $('#results').empty();
                 $('#theModal').modal('toggle');
                 $("#bestFriendPhoto").append(result.friendPhoto);
-                $("#bestFriendPhoto").attr("src", result.friendPhoto);
+                $("#bestFriendPhoto").attr("src", result.friendPhoto).width(200).height(200);
                 $("#results").append(result.friendName);
+               
 
                 console.log(result);
             });
